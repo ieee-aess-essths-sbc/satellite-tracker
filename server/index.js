@@ -10,6 +10,17 @@ const N2YO_API_KEY = process.env.N2YO_API_KEY;
 
 app.use(cors());
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Satellite Tracker API', 
+    endpoints: {
+      'GET /api/satellites/above': 'Get satellites above a location',
+      'GET /api/satellites/positions': 'Get satellite positions over time'
+    }
+  });
+});
+
 // Proxy for /satellites/above
 app.get('/api/satellites/above', async (req, res) => {
   const { lat, lng, alt, radius, category } = req.query;
