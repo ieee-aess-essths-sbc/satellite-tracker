@@ -9,6 +9,9 @@ const SATELLITE_MODEL_URL = "/satellites.glb";
 const RADIUS_KM = 70; // Search radius
 const CATEGORY = 0; // All categories
 
+// API base URL - use environment variable for production
+const API_BASE_URL = import.meta.env.VITE_API_URL || "";
+
 const SatelliteTracker = () => {
   const [satellites, setSatellites] = useState([]);
   const [satModel, setSatModel] = useState();
@@ -37,7 +40,7 @@ const SatelliteTracker = () => {
           category: CATEGORY
         });
         const res = await fetch(
-          `/api/satellites/above?${params.toString()}`
+          `${API_BASE_URL}/api/satellites/above?${params.toString()}`
         );
         const data = await res.json();
         if (data.above) {
